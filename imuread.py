@@ -83,7 +83,6 @@ class IMU(Serial, Thread):
 
                 self.decode( )
 
-                sleep(0.001)
         
         else:
             self.header_pass = 0
@@ -115,7 +114,7 @@ class IMU(Serial, Thread):
         speeds = int32( raw_imu[64] * shft24 + raw_imu[63] * shft16 + raw_imu[62] * shft8 + raw_imu[61] ) / 1000 * 3.6
 
         print( 'acc', ax, ay, az )
-        print( 'ang', wx, wy, wz )
+        print( 'ang', round(wx,2), round(wy,2), round(wz,2) )
         print( 'ang', roll, pitch, yaw )
         print( 'hgt', height )
         print( 'lot', lon, lat )
@@ -125,7 +124,7 @@ class IMU(Serial, Thread):
 
 if __name__ == "__main__":
 
-    imuserial = IMU( port="/dev/ttyUSB0", baudrate=115200 )
+    imuserial = IMU( port="/dev/ttyUSB0" )
     imuserial.start()
 
     imuserial.reading = True
