@@ -40,6 +40,7 @@ class IMU(Serial, Thread):
         ## index 
         self.index = 0 
 
+        self.roll = 0
 
     def run(self):
 
@@ -99,7 +100,7 @@ class IMU(Serial, Thread):
         wy = int16( raw_imu[16] * shft8 + raw_imu[15] ) * Kw
         wz = int16( raw_imu[18] * shft8 + raw_imu[17] ) * Kw
 
-        roll  = int16( raw_imu[25] * shft8 + raw_imu[24] ) * Kt
+        self.roll  = int16( raw_imu[25] * shft8 + raw_imu[24] ) * Kt
         pitch = int16( raw_imu[27] * shft8 + raw_imu[26] ) * Kt
         yaw   = int16( raw_imu[29] * shft8 + raw_imu[28] ) * Kt
 
@@ -113,13 +114,13 @@ class IMU(Serial, Thread):
 
         speeds = int32( raw_imu[64] * shft24 + raw_imu[63] * shft16 + raw_imu[62] * shft8 + raw_imu[61] ) / 1000 * 3.6
 
-        print( 'acc', ax, ay, az )
-        print( 'ang', round(wx,2), round(wy,2), round(wz,2) )
-        print( 'ang', roll, pitch, yaw )
-        print( 'hgt', height )
-        print( 'lot', lon, lat )
-        print( 'sps', speeds )
-        print( '===' * 20 )
+        # print( 'acc', ax, ay, az )
+        # print( 'ang', round(wx,2), round(wy,2), round(wz,2) )
+        # print( 'ang', roll, pitch, yaw )
+        # print( 'hgt', height )
+        # print( 'lot', lon, lat )
+        # print( 'sps', speeds )
+        # print( '===' * 20 )
 
 
 if __name__ == "__main__":
