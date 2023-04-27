@@ -1,5 +1,4 @@
 import numpy as np
 
-a = np.zeros(10)
 
-print(a)
+print(np.int32(2**31-1))
